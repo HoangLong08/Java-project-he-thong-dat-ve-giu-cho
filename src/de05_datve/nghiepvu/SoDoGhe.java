@@ -41,7 +41,7 @@ public class SoDoGhe {
 
     public KetQua giuGhe(int soGhe, String nguoi) {
         synchronized (khoa) {
-            if (soGhe < 0 || soGhe >= trangThai.length) {
+            if (ngoaiPhamVi(soGhe)) {
                 return new ThatBai(LyDo.GHE_KHONG_TON_TAI);
             }
             if (trangThai[soGhe] == TrangThaiGhe.DA_BAN) {
@@ -58,7 +58,7 @@ public class SoDoGhe {
 
     public KetQua thanhToan(int soGhe, String nguoi) {
         synchronized (khoa) {
-            if (soGhe < 0 || soGhe >= trangThai.length) {
+            if (ngoaiPhamVi(soGhe)) {
                 return new ThatBai(LyDo.GHE_KHONG_TON_TAI);
             }
             if (trangThai[soGhe] == TrangThaiGhe.TRONG) {
@@ -82,7 +82,23 @@ public class SoDoGhe {
     }
 
     public KetQua huyGiu(int soGhe, String nguoi) {
-        throw new UnsupportedOperationException("Chưa làm: F06");
+        synchronized (khoa) {
+            if (ngoaiPhamVi(soGhe)) {
+                return new ThatBai(LyDo.GHE_KHONG_TON_TAI);
+            }
+            if (trangThai[soGhe] == TrangThaiGhe.TRONG) {
+                return new ThatBai(LyDo.CHUA_AI_GIU);
+            }
+            if (trangThai[soGhe] == TrangThaiGhe.DA_BAN) {
+                return new ThatBai(LyDo.GHE_DA_BAN);
+            }
+            if (!phieuGiu.get(soGhe).nguoiGiu().equals(nguoi)) {
+                return new ThatBai(LyDo.KHONG_PHAI_NGUOI_GIU);
+            }
+            trangThai[soGhe] = TrangThaiGhe.TRONG;
+            phieuGiu.remove(soGhe);
+            return new ThanhCong();
+        }
     }
 
     public int nhaGheHetHan() {
@@ -110,5 +126,10 @@ public class SoDoGhe {
 
     public BaoCao baoCao() {
         throw new UnsupportedOperationException("Chưa làm: F09");
+    }
+
+    // Số ghế hợp lệ là 0..tổng - 1; dùng chung cho giuGhe, thanhToan, huyGiu.
+    private boolean ngoaiPhamVi(int soGhe) {
+        return soGhe < 0 || soGhe >= trangThai.length;
     }
 }
