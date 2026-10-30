@@ -46,6 +46,16 @@ class GiuGheTest {
     }
 
     @Test
+    void giuGheDaBanThatBai() {
+        SoDoGhe soDo = new SoDoGhe(5, dongHo, SoDoGhe.THOI_HAN_GIU_MAC_DINH);
+        soDo.giuGhe(2, "An");
+        soDo.thanhToan(2, "An");
+
+        assertEquals(new ThatBai(LyDo.GHE_DA_BAN), soDo.giuGhe(2, "Binh"));
+        assertEquals(TrangThaiGhe.DA_BAN, soDo.chupSoDo()[2]);
+    }
+
+    @Test
     void chiNhanSoGheTuKhongDenTongTruMot() {
         SoDoGhe soDo = new SoDoGhe(5, dongHo, SoDoGhe.THOI_HAN_GIU_MAC_DINH);
 
