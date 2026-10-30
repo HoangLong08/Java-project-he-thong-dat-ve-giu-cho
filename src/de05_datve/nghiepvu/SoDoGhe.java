@@ -2,7 +2,10 @@ package de05_datve.nghiepvu;
 
 import de05_datve.model.BaoCao;
 import de05_datve.model.KetQua;
+import de05_datve.model.LyDo;
 import de05_datve.model.PhieuGiu;
+import de05_datve.model.ThanhCong;
+import de05_datve.model.ThatBai;
 import de05_datve.model.TrangThaiGhe;
 
 import java.time.Duration;
@@ -36,7 +39,16 @@ public class SoDoGhe {
     }
 
     public KetQua giuGhe(int soGhe, String nguoi) {
-        throw new UnsupportedOperationException("Chưa làm: F02");
+        synchronized (khoa) {
+            if (soGhe < 0 || soGhe >= trangThai.length) {
+                return new ThatBai(LyDo.GHE_KHONG_TON_TAI);
+            }
+            if (!trangThai[soGhe].coTheChuyenSang(TrangThaiGhe.DANG_GIU)) {
+                return new ThatBai(LyDo.GHE_DANG_BI_GIU);
+            }
+            trangThai[soGhe] = TrangThaiGhe.DANG_GIU;
+            return new ThanhCong();
+        }
     }
 
     public KetQua thanhToan(int soGhe, String nguoi) {
