@@ -9,19 +9,31 @@ public class BoNhaGheTuDong implements Runnable {
     private Thread luong;
 
     public BoNhaGheTuDong(SoDoGhe soDo, long chuKyMs) {
-        throw new UnsupportedOperationException("Chưa làm: F05");
+        this.soDo = soDo;
+        this.chuKyMs = chuKyMs;
     }
 
     public void batDau() {
-        throw new UnsupportedOperationException("Chưa làm: F05");
+        dangChay = true;
+        luong = new Thread(this);
+        luong.start();
     }
 
+    // Tắt cờ rồi chờ luồng nền kết thúc; luồng chỉ thấy cờ sau giấc sleep hiện tại nên chờ tối đa một chu kỳ.
     public void dung() throws InterruptedException {
-        throw new UnsupportedOperationException("Chưa làm: F05");
+        dangChay = false;
+        luong.join();
     }
 
     @Override
     public void run() {
-        throw new UnsupportedOperationException("Chưa làm: F05");
+        while (dangChay) {
+            try {
+                Thread.sleep(chuKyMs);
+            } catch (InterruptedException e) {
+                return;
+            }
+            soDo.nhaGheHetHan();
+        }
     }
 }

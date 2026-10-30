@@ -7,7 +7,7 @@ import java.util.function.Supplier;
 // Đồng hồ giả cho test: đứng yên cho tới khi test gọi tien(...), nên test hết hạn 5 phút khỏi phải chờ.
 class DongHoGia implements Supplier<LocalDateTime> {
 
-    private LocalDateTime bayGio;
+    private volatile LocalDateTime bayGio; // volatile: luồng khác thấy ngay giờ mới khi test vặn đồng hồ
 
     DongHoGia(LocalDateTime batDau) {
         this.bayGio = batDau;

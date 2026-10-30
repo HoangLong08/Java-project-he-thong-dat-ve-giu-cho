@@ -12,6 +12,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.function.Supplier;
 
@@ -71,9 +72,11 @@ public class SoDoGhe {
             }
             if (phieuGiu.get(soGhe).hetHan(dongHo.get(), thoiHanGiu)) {
                 trangThai[soGhe] = TrangThaiGhe.TRONG;
+                phieuGiu.remove(soGhe);
                 return new ThatBai(LyDo.HET_HAN_GIU);
             }
             trangThai[soGhe] = TrangThaiGhe.DA_BAN;
+            phieuGiu.remove(soGhe);
             return new ThanhCong();
         }
     }
@@ -83,7 +86,20 @@ public class SoDoGhe {
     }
 
     public int nhaGheHetHan() {
-        throw new UnsupportedOperationException("Chưa làm: F05");
+        synchronized (khoa) {
+            LocalDateTime bayGio = dongHo.get();
+            int daNha = 0;
+            Iterator<PhieuGiu> it = phieuGiu.values().iterator();
+            while (it.hasNext()) {
+                PhieuGiu phieu = it.next();
+                if (phieu.hetHan(bayGio, thoiHanGiu)) {
+                    trangThai[phieu.soGhe()] = TrangThaiGhe.TRONG;
+                    it.remove();
+                    daNha++;
+                }
+            }
+            return daNha;
+        }
     }
 
     public TrangThaiGhe[] chupSoDo() {
