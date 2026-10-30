@@ -7,6 +7,10 @@ public enum TrangThaiGhe {
     DA_BAN;
 
     public boolean coTheChuyenSang(TrangThaiGhe moi) {
-        throw new UnsupportedOperationException("Chưa làm: F01");
+        return switch (this) {
+            case TRONG -> moi == DANG_GIU;
+            case DANG_GIU -> moi == DA_BAN || moi == TRONG;
+            case DA_BAN -> false;
+        };
     }
 }

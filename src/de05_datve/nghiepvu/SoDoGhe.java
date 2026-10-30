@@ -7,6 +7,7 @@ import de05_datve.model.TrangThaiGhe;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
@@ -23,7 +24,15 @@ public class SoDoGhe {
     private final Object khoa = new Object();
 
     public SoDoGhe(int tongSoGhe, Supplier<LocalDateTime> dongHo, Duration thoiHanGiu) {
-        throw new UnsupportedOperationException("Chưa làm: F01");
+        if (tongSoGhe <= 0) {
+            throw new IllegalArgumentException("Tổng số ghế phải lớn hơn 0: " + tongSoGhe);
+        }
+        this.trangThai = new TrangThaiGhe[tongSoGhe];
+        for (int i = 0; i < tongSoGhe; i++) {
+            trangThai[i] = TrangThaiGhe.TRONG;
+        }
+        this.dongHo = dongHo;
+        this.thoiHanGiu = thoiHanGiu;
     }
 
     public KetQua giuGhe(int soGhe, String nguoi) {
@@ -43,7 +52,9 @@ public class SoDoGhe {
     }
 
     public TrangThaiGhe[] chupSoDo() {
-        throw new UnsupportedOperationException("Chưa làm: F01");
+        synchronized (khoa) {
+            return Arrays.copyOf(trangThai, trangThai.length);
+        }
     }
 
     public BaoCao baoCao() {
