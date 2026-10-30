@@ -7,6 +7,6 @@ import java.time.LocalDateTime;
 public record PhieuGiu(int soGhe, String nguoiGiu, LocalDateTime lucGiu) {
 
     public boolean hetHan(LocalDateTime bayGio, Duration thoiHan) {
-        throw new UnsupportedOperationException("Chưa làm: F04");
+        return !bayGio.isBefore(lucGiu.plus(thoiHan));
     }
 }

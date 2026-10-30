@@ -69,6 +69,10 @@ public class SoDoGhe {
             if (!phieuGiu.get(soGhe).nguoiGiu().equals(nguoi)) {
                 return new ThatBai(LyDo.KHONG_PHAI_NGUOI_GIU);
             }
+            if (phieuGiu.get(soGhe).hetHan(dongHo.get(), thoiHanGiu)) {
+                trangThai[soGhe] = TrangThaiGhe.TRONG;
+                return new ThatBai(LyDo.HET_HAN_GIU);
+            }
             trangThai[soGhe] = TrangThaiGhe.DA_BAN;
             return new ThanhCong();
         }
