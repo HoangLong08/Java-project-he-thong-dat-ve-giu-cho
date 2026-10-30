@@ -1,0 +1,7 @@
+# Kết quả biên dịch
+bin/
+*.class
+sources.txt
+
+# Cài đặt Claude Code riêng từng máy
+.claude/settings.local.json
