@@ -67,7 +67,7 @@ java -Dstdout.encoding=UTF-8 -Dstderr.encoding=UTF-8 -cp bin de05_datve.giaodien
 
 Dòng đầu và hai tham số `-D...encoding=UTF-8` giúp console Windows in đúng tiếng Việt có dấu; thiếu chúng thì "Chưa làm" hiện thành "Ch?a l?m". Trong PowerShell phải giữ ngoặc kép quanh `-D...`, nếu không PowerShell tách sai tham số.
 
-Hiện các lớp mới là khung: mọi hàm ném `UnsupportedOperationException("Chưa làm: <mã>")`, nên lệnh chạy sẽ dừng ở lỗi này cho đến khi làm xong F08.
+Chương trình hỏi tên, in sơ đồ 20 ghế (`.` trống, `G` đang giữ, `X` đã bán) và menu `1) Giữ ghế  2) Thanh toán  3) Huỷ giữ  0) Thoát`; ghế giữ quá 5 phút được luồng nền tự nhả. Báo cáo (F09) chưa làm.
 
 ## Chạy test (từ thư mục gốc dự án)
 
