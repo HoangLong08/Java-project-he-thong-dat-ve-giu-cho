@@ -1,0 +1,8 @@
+{
+    // Terminal mà nút Run/Debug mở ra: cmd đặt bảng mã UTF-8 (chcp 65001) để Java in đúng tiếng Việt có dấu.
+    // Không dùng PowerShell: PSReadLine trả bảng mã hiển thị về 437 mỗi khi nhận lệnh, nên chữ có dấu vẫn lỗi.
+    "terminal.integrated.automationProfile.windows": {
+        "path": "C:\\Windows\\System32\\cmd.exe",
+        "args": ["/K", "chcp 65001 >nul"]
+    }
+}

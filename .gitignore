@@ -1,5 +1,6 @@
 # Kết quả biên dịch
 bin/
+bin-test/
 *.class
 sources.txt
 

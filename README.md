@@ -11,7 +11,8 @@ Bài tập lớn học phần AJP201 (Lập trình Java nâng cao). Người dù
 
 ```
 Project-he-thong-dat-ve-giu-cho/
-├── .project, .classpath        dự án Eclipse/VS Code: nguồn src/ và test/, thư viện lib/, đầu ra bin/, JavaSE-21
+├── .project, .classpath, .settings/   dự án Eclipse/VS Code: nguồn src/ và test/, thư viện lib/, đầu ra bin/ (test: bin-test/), JavaSE-21
+├── .vscode/settings.json       terminal của nút Run/Debug là cmd với chcp 65001 để in đúng tiếng Việt
 ├── README.md
 ├── main.pdf
 ├── docs/
